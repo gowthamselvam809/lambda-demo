@@ -16,24 +16,18 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '20'
+        node-version: '14'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Check environment variables
-      run: env | grep AWS
-
-    - name: Configure AWS credentials
+    - name: Log in to Serverless Framework
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        echo "AWS Access Key ID: $AWS_ACCESS_KEY_ID"
-        echo "AWS Secret Access Key: $AWS_SECRET_ACCESS_KEY"
+        SERVERLESS_ACCESS_TOKEN: ${{ secrets.SERVERLESS_ACCESS_TOKEN }}
+      run: npx serverless login --token $SERVERLESS_ACCESS_TOKEN
 
     - name: Deploy to AWS
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: npx sls deploy --region ap-south-1 --stage dev --verbose
+      run: npx serverless deploy --region ap-south-1 --stage dev --verbose
