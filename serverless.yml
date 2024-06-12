@@ -1,0 +1,51 @@
+service: beamEducation
+provider:
+    name: aws
+    runtime: nodejs18.x
+    lambdaHashingVersion: "20201221"
+    timeout: 60
+    region: ap-south-1
+    stage: dev
+    deploymentBucket:
+        name: demo-bucket
+    environment:
+        STAGE: dev
+        ACCESS_KEY_ID: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.ACCESS_KEY_ID}
+        SECRET_ACCESS_KEY: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.SECRET_ACCESS_KEY}
+        # SECRET_KEY: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.SECRET_KEY}
+        REGION: ap-south-1
+        # ACCOUNT_NUMBER: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.ACCOUNT_NUMBER}
+        BUCKET_NAME: demo-bucket-server
+        NODE_ENV: dev
+        
+     iam:
+        role:
+            statements:
+                # - Effect: Allow
+                #   Action:
+                #       - dynamodb:Query
+                #       - dynamodb:Scan
+                #       - dynamodb:GetItem
+                #       - dynamodb:PutItem
+                #       - dynamodb:UpdateItem
+                #       - dynamodb:DeleteItem
+                #       - dynamodb:CreateTable
+                #   Resource:
+                #       - "*"
+                # - Effect: "Allow"
+                #   Action:
+                #       - "sns:*"
+                #   Resource: "*"    
+                - Effect: "Allow"
+                  Action:
+                      - "s3:*"
+                  Resource: "*"       
+
+functions:
+    demo_server-lambda:
+        handler: handler.demo_server
+        events:
+            - http:
+                  path: /
+                  method: GET
+                  cors: true
