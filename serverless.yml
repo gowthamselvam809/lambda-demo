@@ -8,13 +8,13 @@ provider:
   region: ap-south-1
   stage: prod
   deploymentBucket:
-    name: demo-bucket
+    name: bucket-lambda-1
   environment:
     STAGE: prod
     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     REGION: ap-south-1
-    BUCKET_NAME: demo-bucket-server
+    BUCKET_NAME: bucket-lambda-1
     NODE_ENV: prod
 
   iam:
@@ -30,7 +30,7 @@ resources:
     MyBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: demo-bucket
+        BucketName: bucket-lambda-1
 
 functions:
   node-api:
