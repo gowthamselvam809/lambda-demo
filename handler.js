@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const cors = require('cors');
 
-var NODE_ENV = process.env.NODE_ENV || 'development';
+var NODE_ENV = 'test';
 
 app.use(express.urlencoded({
     limit: '50mb',
