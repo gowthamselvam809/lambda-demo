@@ -17,28 +17,28 @@ provider:
         BUCKET_NAME: demo-bucket-server
         NODE_ENV: dev
         
-     iam:
-        role:
-            statements:
-                # - Effect: Allow
-                #   Action:
-                #       - dynamodb:Query
-                #       - dynamodb:Scan
-                #       - dynamodb:GetItem
-                #       - dynamodb:PutItem
-                #       - dynamodb:UpdateItem
-                #       - dynamodb:DeleteItem
-                #       - dynamodb:CreateTable
-                #   Resource:
-                #       - "*"
-                # - Effect: "Allow"
-                #   Action:
-                #       - "sns:*"
-                #   Resource: "*"    
-                - Effect: "Allow"
-                  Action:
-                      - "s3:*"
-                  Resource: "*"       
+    iam:
+      role:
+          statements:
+              # - Effect: Allow
+              #   Action:
+              #       - dynamodb:Query
+              #       - dynamodb:Scan
+              #       - dynamodb:GetItem
+              #       - dynamodb:PutItem
+              #       - dynamodb:UpdateItem
+              #       - dynamodb:DeleteItem
+              #       - dynamodb:CreateTable
+              #   Resource:
+              #       - "*"
+              # - Effect: "Allow"
+              #   Action:
+              #       - "sns:*"
+              #   Resource: "*"    
+              - Effect: "Allow"
+                Action:
+                    - "s3:*"
+                Resource: "*"       
 
 functions:
     demo_server-lambda:
