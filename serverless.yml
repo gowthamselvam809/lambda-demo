@@ -4,15 +4,13 @@ provider:
   name: aws
   runtime: nodejs20.x
   lambdaHashingVersion: "20201221"
-  timeout: 60
+  timeout: 30  
   region: ap-south-1
   stage: prod
   deploymentBucket:
     name: bucket-lambda-1
   environment:
     STAGE: prod
-    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     REGION: ap-south-1
     BUCKET_NAME: bucket-lambda-1
     NODE_ENV: prod
@@ -22,13 +20,34 @@ provider:
       statements:
         - Effect: "Allow"
           Action:
-            - "s3:*"
-          Resource: "*"
+            - "s3:GetObject"
+            - "s3:PutObject"
+          Resource: "arn:aws:s3:::bucket-lambda-1/*"
 
+resources:
+  Resources:
+    MyBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: bucket-lambda-1
+    BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref MyBucket
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal: "*"
+              Action:
+                - "s3:GetObject"
+                - "s3:PutObject"
+              Resource: "arn:aws:s3:::bucket-lambda-1/*"
 
 functions:
   node-api:
     handler: index.handler
+    timeout: 30  
     events:
       - http:
           path: /welcome
