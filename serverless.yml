@@ -12,7 +12,7 @@ provider:
   environment:
     STAGE: prod
     REGION: ap-south-1
-    BUCKET_NAME: prod-bucket-lambda-1
+    BUCKET_NAME: bucket-lambda-1
     NODE_ENV: prod
 
   iam:
@@ -22,7 +22,7 @@ provider:
           Action:
             - "s3:GetObject"
             - "s3:PutObject"
-          Resource: "arn:aws:s3:::prod-bucket-lambda-1/*"
+          Resource: "arn:aws:s3:::bucket-lambda-1/*"
 
 functions:
   node-api:
