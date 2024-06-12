@@ -1,4 +1,4 @@
-service: demo-express-3
+service: express
 
 provider:
   name: aws
@@ -23,26 +23,6 @@ provider:
             - "s3:GetObject"
             - "s3:PutObject"
           Resource: "arn:aws:s3:::prod-bucket-lambda-1/*"
-
-resources:
-  Resources:
-    MyBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: prod-bucket-lambda-1
-    BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket: !Ref MyBucket
-        PolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            - Effect: "Allow"
-              Principal: "*"
-              Action:
-                - "s3:GetObject"
-                - "s3:PutObject"
-              Resource: "arn:aws:s3:::prod-bucket-lambda-1/*"
 
 functions:
   node-api:
