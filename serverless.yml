@@ -10,9 +10,8 @@ provider:
         name: demo-bucket
     environment:
         STAGE: dev
-        ACCESS_KEY_ID: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.ACCESS_KEY_ID}
-        SECRET_ACCESS_KEY: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.SECRET_ACCESS_KEY}
-        # SECRET_KEY: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.SECRET_KEY}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}    # SECRET_KEY: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.SECRET_KEY}
         REGION: ap-south-1
         # ACCOUNT_NUMBER: ${file(config/${self:provider.stage}-config.yml):data.aws_credentials.ACCOUNT_NUMBER}
         BUCKET_NAME: demo-bucket-server
