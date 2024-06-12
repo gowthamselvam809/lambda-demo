@@ -1,4 +1,4 @@
-service: beamEducation
+service: demo-express
 
 provider:
   name: aws
