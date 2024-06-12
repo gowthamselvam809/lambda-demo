@@ -1,4 +1,4 @@
-service: demo-express
+service: demo-express-1
 
 provider:
   name: aws
