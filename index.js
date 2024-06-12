@@ -22,7 +22,7 @@ app.use(express.json({
 
 app.use(cors());
 
-app.get('/welcome', (req, res) => { res.send('Welcome for Demo Lambda!!!'); });
+app.get('/welcome', (req, res) => { res.send('Welcome for Demo Lambda succeed!!!'); });
 
 if (NODE_ENV === 'development') {
     app.set("port", process.env.PORT || 3001);
