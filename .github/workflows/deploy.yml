@@ -95,4 +95,4 @@ jobs:
         run: npm install
 
       - name: Package and deploy with Serverless
-        run: npx serverless deploy --stage dev --region ap-south-1 --verbose
+        run: npx serverless deploy --stage uat --region ap-south-1 --verbose

@@ -6,14 +6,14 @@ provider:
   lambdaHashingVersion: "20201221"
   timeout: 30  
   region: ap-south-1
-  stage: dev
+  stage: uat
   deploymentBucket:
     name: bucket-lambda-1
   environment:
-    STAGE: dev
+    STAGE: uat
     REGION: ap-south-1
     BUCKET_NAME: bucket-lambda-1
-    NODE_ENV: dev
+    NODE_ENV: uat
 
   iam:
     role:
