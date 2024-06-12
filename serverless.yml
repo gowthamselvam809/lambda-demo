@@ -1,4 +1,4 @@
-service: demo-express-1
+service: demo-express-2
 
 provider:
   name: aws
@@ -8,7 +8,7 @@ provider:
   region: ap-south-1
   stage: prod
   deploymentBucket:
-    name: bucket-lambda-1
+    name: prod-bucket-lambda-1
   environment:
     STAGE: prod
     REGION: ap-south-1
@@ -24,25 +24,25 @@ provider:
             - "s3:PutObject"
           Resource: "arn:aws:s3:::bucket-lambda-1/*"
 
-resources:
-  Resources:
-    MyBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: bucket-lambda-1
-    BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket: !Ref MyBucket
-        PolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            - Effect: "Allow"
-              Principal: "*"
-              Action:
-                - "s3:GetObject"
-                - "s3:PutObject"
-              Resource: "arn:aws:s3:::bucket-lambda-1/*"
+# resources:
+#   Resources:
+#     MyBucket:
+#       Type: AWS::S3::Bucket
+#       Properties:
+#         BucketName: bucket-lambda-1
+#     BucketPolicy:
+#       Type: AWS::S3::BucketPolicy
+#       Properties:
+#         Bucket: !Ref MyBucket
+#         PolicyDocument:
+#           Version: "2012-10-17"
+#           Statement:
+#             - Effect: "Allow"
+#               Principal: "*"
+#               Action:
+#                 - "s3:GetObject"
+#                 - "s3:PutObject"
+#               Resource: "arn:aws:s3:::bucket-lambda-1/*"
 
 functions:
   node-api:
