@@ -6,14 +6,14 @@ provider:
   lambdaHashingVersion: "20201221"
   timeout: 30  
   region: ap-south-1
-  stage: prod
+  stage: dev
   deploymentBucket:
     name: bucket-lambda-1
   environment:
-    STAGE: prod
+    STAGE: dev
     REGION: ap-south-1
     BUCKET_NAME: bucket-lambda-1
-    NODE_ENV: prod
+    NODE_ENV: dev
 
   iam:
     role:
@@ -36,4 +36,8 @@ functions:
       - http:
           path: /hello
           method: GET
+          cors: true
+      - http:
+          path: /getProduct
+          method: POST
           cors: true
