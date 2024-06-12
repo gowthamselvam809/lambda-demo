@@ -1,4 +1,3 @@
-
 name: Deploy
 
 on:
@@ -19,10 +18,12 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies and bundle code
-        env:
-          CI: true
         run: |
-          npm ci
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
           zip -r publish.zip ./*
       - name: Deploy to AWS Lambda
         run: |
