@@ -25,12 +25,6 @@ provider:
             - "s3:*"
           Resource: "*"
 
-resources:
-  Resources:
-    MyBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: bucket-lambda-1
 
 functions:
   node-api:
