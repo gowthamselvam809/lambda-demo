@@ -28,6 +28,8 @@ app.get('/hello', (req, res) => { res.json({ message: 'Welcome for Demo Lambda s
 
 app.post('/getProduct', (req, res) => { res.json({ message: 'Welcome for Demo Lambda succeed!!!' }); });
 
+app.get('/', (req, res) => { res.send({ message: 'Welcome for Demo!!!' }); });
+
 if (NODE_ENV === 'development') {
     app.set("port", process.env.PORT || 3001);
     let server = http.createServer(app);
