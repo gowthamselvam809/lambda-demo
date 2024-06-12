@@ -30,6 +30,10 @@ functions:
     timeout: 30  
     events:
       - http:
+          path: /
+          method: GET
+          cors: true
+      - http:
           path: /welcome
           method: GET
           cors: true
