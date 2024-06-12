@@ -31,7 +31,6 @@ if (NODE_ENV === 'development') {
         console.log(`Express server listening on http://localhost:${app.get("port")}`);
     });
 } else {
-
     const serverless = require("serverless-http");
     module.exports.demo_server = serverless(app);
 }
