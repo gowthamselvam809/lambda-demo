@@ -1,4 +1,5 @@
-name: Deploy to AWS
+
+name: Deploy
 
 on:
   push:
@@ -6,28 +7,26 @@ on:
       - dev
 
 jobs:
-  deploy:
+  deploy_lambda:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Log in to Serverless Framework
-      env:
-        SERVERLESS_ACCESS_TOKEN: ${{ secrets.SERVERLESS_ACCESS_TOKEN }}
-      run: npx serverless login --token $SERVERLESS_ACCESS_TOKEN
-
-    - name: Deploy to AWS
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: npx serverless deploy --region ap-south-1 --stage dev --verbose
+      - name: Install dependencies and bundle code
+        env:
+          CI: true
+        run: |
+          npm ci
+          zip -r publish.zip ./*
+      - name: Deploy to AWS Lambda
+        run: |
+          aws lambda update-function-code --function-name demo_server-lambda --zip-file fileb://publish.zip --region ap-south-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -6,9 +6,11 @@
     "express": "^4.19.2",
     "http": "^0.0.1-security",
     "nodemon": "^2.0.22",
-    "serverless-http": "^3.2.0"
+    "serverless-http": "^3.2.0",
+    "sls": "^0.1.0"
   },
   "devDependencies": {
+    "esbuild": "^0.21.5",
     "nodemon": "^2.0.22",
     "serverless": "^4.1.0"
   },
